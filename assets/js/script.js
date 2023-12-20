@@ -9,22 +9,8 @@ fetch(omdbURL)
         console.log(data);
     });
 
-let movieID = data.imdbID;
-let year = data.Year;
-let plot = plot = data.Plot;
-let imgURL = data.Poster;
 
-// API for KinoCheck
-fetch('https://api.kinocheck.de/movies?imdb_id=tt3896198')
-fetch(kinoURL)
-    .then(function (response) {
-        return response.json();
-    })
-    .then(function (data) {
-        console.log(data);
-    })
-
-omdbApiKey='17a1e0cd';
+omdbApiKey = '17a1e0cd';
 
 $(document).ready(function () {
     const searchInput = $('#search-input');
@@ -32,6 +18,12 @@ $(document).ready(function () {
     const movieTitleElement = $('#movie-title');
     const moviePosterElement = $('#movie-poster');
     const movieInfoElement = $('#movie-info');
+
+    // user enters movie name and clicks on search button
+    // ...pushes movie name to #movie-title
+    // ...pushes movie details to #movie-details
+    // ......details tbc
+    // ...pushes movie poster to #movie-poster
 
     // Event listener for the search form
     searchInput.on('input', function () {
@@ -44,20 +36,20 @@ $(document).ready(function () {
         // Clear previous suggestions
         resetSuggestions();
 
-        omdbQueryURL='https://www.omdbapi.com/?apikey=' + omdbApiKey + '&s=' + movieTitle
+        omdbQueryURL = 'https://www.omdbapi.com/?apikey=' + omdbApiKey + '&s=' + movieTitle
 
-       if (movieTitle.trim() !== '') {
+        if (movieTitle.trim() !== '') {
             // Make API request to OMDB
             fetch(omdbQueryURL)
                 .then(function (response) {
                     return response.json();
-                  })
+                })
                 .then(function (data) {
                     if (data.Response === 'True' && data.Search) {
                         displaySuggestions(data.Search);
                     }
                 })
-                .catch(function(error) {
+                .catch(function (error) {
                     console.error('Error fetching movie suggestions', error);
                 });
         } else {
@@ -65,8 +57,8 @@ $(document).ready(function () {
         }
     }
 
-     // Function to display movie suggestions in the dropdown
-     function displaySuggestions(suggestions) {
+    // Function to display movie suggestions in the dropdown
+    function displaySuggestions(suggestions) {
         dropdownMenu.empty();
         // Position the dropdown beneath the search input
         const position = searchInput.position();
@@ -78,11 +70,11 @@ $(document).ready(function () {
             width: searchInput.outerWidth()
         });
 
-        suggestions.forEach(function(movie){
+        suggestions.forEach(function (movie) {
             const suggestionItem = $('<a>')
                 .addClass('dropdown-item')
                 .attr('href', '#')
-                .text(movie.Title + ' (' + movie.Year + ')'                )
+                .text(movie.Title + ' (' + movie.Year + ')')
                 .on('click', function (event) {
                     event.preventDefault();
                     console.log('Selected movie: ' + movie.Title
@@ -106,6 +98,7 @@ $(document).ready(function () {
                     moviePosterElement.attr('src', data.Poster);
                     movieInfoElement.html(
                         '<p>Director: ' + data.Director + '</p>' +
+                        '<p>Actors: ' + data.Actors + '</p>' +
                         '<p>Genre: ' + data.Genre + '</p>' +
                         '<p>Plot: ' + data.Plot + '</p>' +
                         '<p>Rated: ' + data.Rated + '</p>' +
@@ -127,3 +120,37 @@ $(document).ready(function () {
     }
 });
 
+// user clicks save to watchlist - pushes movie name to #history and to local storage
+
+// event listener for save to watchlist button 
+$('.btn-success').on('click', function (event) {
+    event.preventDefault();
+
+    const movieTitleListing = $('#movie-title');
+
+    // add title to history
+    $('.list-group').append(movieTitleListing);
+
+    // add title to local storage - not working at present
+    localStorage.setItem(movieTitleListing);
+
+});
+
+
+// user clicks clear history button 
+// clears #history
+// clears local storage?
+
+
+
+// API for KinoCheck
+fetch('https://api.kinocheck.de/movies?imdb_id=tt3896198')
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (data) {
+        console.log(data);
+    })
+
+//KinoCheck to match against imdbID  
+//Generate movie trailer
