@@ -28,11 +28,6 @@ $(document).ready(function () {
     function showMovieSections() {
         $('#movie-header, #movie-details, #movie-trailer').show();
     }
-    // user enters movie name and clicks on search button
-    // ...pushes movie name to #movie-title
-    // ...pushes movie details to #movie-details
-    // ......details tbc
-    // ...pushes movie poster to #movie-poster
 
     // Event listener for the search form
     searchInput.on('input', function () {
@@ -117,6 +112,8 @@ $(document).ready(function () {
                         '<p id="imdbID" style="display: none;">' + data.imdbID + '</p>'
                     );
                     showMovieSections();
+                    // // Fetch movie trailer from KinoCheck using IMDb ID
+                    fetchKinoCheckTrailer(imdbID);
                 }
             })
             .catch(error => {
@@ -130,8 +127,6 @@ $(document).ready(function () {
         dropdownMenu.hide();
     }
 
-
-    // user clicks save to watchlist - pushes movie name to #history and to local storage
     // Function to save a movie to the watchlist in local storage
     function saveToWatchlist(movie) {
         // Retrieve existing watchlist from local storage
@@ -195,7 +190,7 @@ $(document).ready(function () {
 
     });
 
-    // Add event listener for modal close button click (outside of the main click handler)
+    // Add event listener for modal close button click (outside of the above)
     $('#duplicateFilmModal').on('hidden.bs.modal', function () {
     });
 
@@ -222,6 +217,8 @@ $(document).ready(function () {
                 .on('click', function () {
                     // When a watchlist item is clicked, get and display movie details
                     getMovieDetails(movie.imdbID);
+                    // For error checking
+                    console.log(movie.imdbID)
                     showMovieSections();
                 });
 
@@ -233,22 +230,42 @@ $(document).ready(function () {
     // Populate watchlist from local storage on page load
     populateWatchlistFromLocalStorage();
 
-    // user clicks clear history button 
-    // clears #history
-    // clears local storage?
+    function fetchKinoCheckTrailer(imdbID) {
+        const kinoCheckURL = 'https://api.kinocheck.de/movies?imdb_id=' + imdbID + '&language=en';
+        console.log(kinoCheckURL);
+        
+        const trailerSection = $('#movie-trailer');
+        
+        // Clear previous trailer content
+        trailerSection.html('');
+        
+        // Fetch movie details from KinoCheck
+        fetch(kinoCheckURL)
+
+            .then(function (response) {
+                // Check if the response is successful
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(function (data) {
+                // Check if the data contains a trailer object with youtube_video_id
+                if (data.trailer && data.trailer.youtube_video_id) {
+                    const youtubeVideoId = data.trailer.youtube_video_id;
+
+                    // Embed the YouTube video
+                    const embedCode = '<iframe width="560" height="315" src="https://www.youtube.com/embed/' + youtubeVideoId + '" frameborder="0" allowfullscreen></iframe>';
+                    trailerSection.html(embedCode);
+                }
+            })
+            // If no trailer can be found, display message
+            .catch(function (error) {
+                console.error('Fetch error:', error);
+                trailerSection.html('<p>Sorry no trailer is available for this film through the Kinocheck API - please try elsewhere!</p>');
+            });
+    }
 
 
-
-    // API for KinoCheck
-    fetch('https://api.kinocheck.de/movies?imdb_id=tt3896198')
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (data) {
-            console.log(data);
-        })
-
-    //KinoCheck to match against imdbID  
-    //Generate movie trailer
 
 });
