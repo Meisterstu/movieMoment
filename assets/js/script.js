@@ -160,19 +160,43 @@ $(document).ready(function () {
         const imdbID = $('#imdbID').text();
         // CHECK THIS WORKS
         console.log(imdbID);
-        // Create a button or list item for the watchlist
-        const watchlistItem = $('<button>')
-            .addClass('btn btn-secondary watchlist-item')
-            .text(movieTitle)
-            //test this line below
-            .data('imdbID', imdbID)
-            .on('click', function () {
-                getMovieDetails(imdbID);
+
+        // Check if a button with the same imdbID already exists
+        const existingButton = $('.watchlist-item').filter(function () {
+            return $(this).data('imdbID') === imdbID;
+        });
+
+        if (!existingButton.length) {
+            // Create a button or list item for the watchlist
+            const watchlistItem = $('<button>')
+                .addClass('btn btn-secondary watchlist-item')
+                .text(movieTitle)
+                // test this line below
+                .data('imdbID', imdbID)
+                .on('click', function () {
+                    getMovieDetails(imdbID);
+                });
+            // Append the watchlist item to the watchlist container
+            watchlistContainer.append(watchlistItem);
+
+            // Save the movie to the watchlist in local storage
+            saveToWatchlist({ imdbID: imdbID, title: movieTitle });
+
+        } else {
+            // Show the modal if the film is already in the watchlist
+            $('#duplicateFilmModal').modal('show');
+
+            // Manually add click event listeners for close button and "×" button
+            $('#duplicateFilmModal .close, #duplicateFilmModal [data-dismiss="modal"]').on('click', function () {
+                $('#duplicateFilmModal').modal('hide');
             });
-        // Append the watchlist item to the watchlist container
-        watchlistContainer.append(watchlistItem);
-        // Save the movie to the watchlist in local storage
-        saveToWatchlist({ imdbID: imdbID, title: movieTitle });
+        }
+
+
+    });
+
+    // Add event listener for modal close button click (outside of the main click handler)
+    $('#duplicateFilmModal').on('hidden.bs.modal', function () {
     });
 
     // Event listener for the clear history button
