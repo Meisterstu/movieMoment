@@ -161,21 +161,45 @@ $(document).ready(function () {
             return $(this).data('imdbID') === imdbID;
         });
 
-        if (!existingButton.length) {
-            // Create a button or list item for the watchlist
-            const watchlistItem = $('<button>')
-                .addClass('btn btn-secondary watchlist-item')
-                .text(movieTitle)
-                // test this line below
-                .data('imdbID', imdbID)
-                .on('click', function () {
-                    getMovieDetails(imdbID);
-                });
+        if (!existingButton.length) { 
+            const watchlistItem = $('<div>')
+            .addClass('watchlist-item')
+            .append(
+                $('<button>')
+                    .addClass('btn btn-secondary movie-info-button')
+                    .text(movieTitle)
+                    .data('imdbID', imdbID)
+                    .on('click', function () {
+                        getMovieDetails(imdbID);
+                    }),
+
+            // THINK WE WOULD NEED TO ADD removeMovieFromLocalStorage function
+            // .append(
+            //     $('<button>')
+            //         .addClass('btn btn-secondary movie-info-button')
+            //         .text(movieTitle)
+            //         .data('imdbID', imdbID)
+            //         .on('click', function () {
+            //             getMovieDetails(imdbID);
+            //         }),
+            //     $('<button>')
+            //         .addClass('btn btn-danger close-button')
+            //         .text('X')
+            //         .on('click', function (event) {
+            //             // Prevents the click event from triggering on the movie info button
+            //             event.stopPropagation(); 
+            //             // Remove the movie from local storage
+            //             removeMovieFromLocalStorage(imdbID);
+            //             // Remove the movie display from the DOM
+            //             $(this).parent('.watchlist-item').remove();
+            //         })
+            );
             // Append the watchlist item to the watchlist container
             watchlistContainer.append(watchlistItem);
 
             // Save the movie to the watchlist in local storage
             saveToWatchlist({ imdbID: imdbID, title: movieTitle });
+            updateClearHistoryButtonVisibility();
 
         } else {
             // Show the modal if the film is already in the watchlist
@@ -194,6 +218,18 @@ $(document).ready(function () {
     $('#duplicateFilmModal').on('hidden.bs.modal', function () {
     });
 
+    // Function to update the visibility of the clear history button based on local storage
+    function updateClearHistoryButtonVisibility() {
+        // Check if there are items in local storage
+        if (localStorage.length > 0) {
+            // If there are items, display the button
+            $('#clear-history-button').css('display', 'block');
+        } else {
+            // If there are no items, hide the button
+            $('#clear-history-button').css('display', 'none');
+        }
+    }
+
     // Event listener for the clear history button
     $('#clear-history-button').on('click', function () {
         // Clear local storage
@@ -201,6 +237,7 @@ $(document).ready(function () {
 
         // Clear the watchlist container
         watchlistContainer.empty();
+        updateClearHistoryButtonVisibility();
     });
 
     // Function to populate watchlist from local storage
@@ -220,7 +257,30 @@ $(document).ready(function () {
                     // For error checking
                     console.log(movie.imdbID)
                     showMovieSections();
-                });
+            
+            // THINK WE WOULD NEED TO ADD removeMovieFromLocalStorage function
+            // const watchlistItem = $('<div>')
+            // .addClass('watchlist-item')
+            // .append(
+            //     $('<button>')
+            //         .addClass('btn btn-secondary movie-info-button')
+            //         .text(movieTitle)
+            //         .data('imdbID', imdbID)
+            //         .on('click', function () {
+            //             getMovieDetails(imdbID);
+            //         }),
+            //     $('<button>')
+            //         .addClass('btn btn-danger close-button')
+            //         .text('X')
+            //         .on('click', function (event) {
+            //             // Prevents the click event from triggering on the movie info button
+            //             event.stopPropagation(); 
+            //             // Remove the movie from local storage
+            //             removeMovieFromLocalStorage(imdbID);
+            //             // Remove the movie display from the DOM
+            //             $(this).parent('.watchlist-item').remove();
+            //         })
+            })
 
             // Append the watchlist item to the watchlist container
             watchlistContainer.append(watchlistItem);
@@ -230,15 +290,18 @@ $(document).ready(function () {
     // Populate watchlist from local storage on page load
     populateWatchlistFromLocalStorage();
 
+    // Initial check on page load
+    updateClearHistoryButtonVisibility();
+
     function fetchKinoCheckTrailer(imdbID) {
         const kinoCheckURL = 'https://api.kinocheck.de/movies?imdb_id=' + imdbID + '&language=en';
         console.log(kinoCheckURL);
-        
+
         const trailerSection = $('#movie-trailer');
-        
+
         // Clear previous trailer content
         trailerSection.html('');
-        
+
         // Fetch movie details from KinoCheck
         fetch(kinoCheckURL)
 
@@ -250,6 +313,11 @@ $(document).ready(function () {
                 return response.json();
             })
             .then(function (data) {
+                // Check if data.trailer is null
+                if (data.trailer === null) {
+                    throw new Error('No trailer available from kinocheck');
+                }
+
                 // Check if the data contains a trailer object with youtube_video_id
                 if (data.trailer && data.trailer.youtube_video_id) {
                     const youtubeVideoId = data.trailer.youtube_video_id;
@@ -268,4 +336,4 @@ $(document).ready(function () {
 
 
 
-});
+    });
