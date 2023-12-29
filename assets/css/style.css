@@ -1,19 +1,23 @@
 /* CAN DELETE THESE - JUST CHECKING BOX POSITION */
 
-#movie-trailer {
-    border: 2px solid red;
+#aside-whatchlist {
+    border: 2px solid green;
 }
 
-#movie-info{
+#movie-header {
+    border: 2px solid orange;
+}
+
+#movie-info {
     border: 2px solid blue;
 }
 
-#movie-poster{
+#movie-poster {
     border: 2px solid yellow;
 }
 
-#movie-header{
-    border: 2px solid orange;
+#movie-trailer {
+    border: 2px solid red;
 }
 
 /* CAN DELETE THESE - JUST CHECKING BOX POSITION */
@@ -44,5 +48,3 @@ header.h1 {
     font-family: 'Roboto', sans-serif !important;
     font-weight: 700 !important;
 }
-
-
