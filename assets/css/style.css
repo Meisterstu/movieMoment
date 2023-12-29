@@ -17,3 +17,13 @@
 }
 
 /* CAN DELETE THESE - JUST CHECKING BOX POSITION */
+
+
+/* Defined main colours */
+:root {
+    --midnightBlue: #001F3F;
+    --silver: #A2A2A2;
+    --gold: #FFD700;
+    --ghostWhite: #fbfbff;
+}
+
