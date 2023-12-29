@@ -1,19 +1,23 @@
 /* CAN DELETE THESE - JUST CHECKING BOX POSITION */
 
-#movie-trailer {
-    border: 2px solid red;
+#aside-watchlist {
+    border: 2px solid green;
 }
 
-#movie-info{
+#movie-header {
+    border: 2px solid orange;
+}
+
+#movie-info {
     border: 2px solid blue;
 }
 
-#movie-poster{
+#movie-poster {
     border: 2px solid yellow;
 }
 
-#movie-header{
-    border: 2px solid orange;
+#movie-trailer {
+    border: 2px solid red;
 }
 
 /* CAN DELETE THESE - JUST CHECKING BOX POSITION */
@@ -27,3 +31,20 @@
     --ghostWhite: #fbfbff;
 }
 
+/* * ----- BODY STYLE ----- */
+body {
+    font-family: 'Roboto', sans-serif !important;
+    background-color: var(--midnightBlue) !important;
+    color: var(--ghostWhite) !important;
+}
+
+/* *  ----- HEADER STYLE ----- */
+header {
+    background: linear-gradient(109.6deg, rgb(36, 45, 57) 11.2%, rgb(16, 37, 60) 51.2%, rgb(0, 18, 34) 98.6%);
+}
+
+header.h1 {
+    color: var(--gold) !important;
+    font-family: 'Roboto', sans-serif !important;
+    font-weight: 700 !important;
+}
