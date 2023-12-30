@@ -14,6 +14,7 @@ omdbApiKey = '17a1e0cd';
 
 const searchInput = $('#search-input');
 const dropdownMenu = $('#search-form .dropdown-menu');
+const movieContainer = $('#movie-container');
 const movieTitleElement = $('#movie-title');
 const moviePosterElement = $('#movie-poster');
 const movieInfoElement = $('#movie-info');
@@ -98,21 +99,32 @@ $(document).ready(function () {
             .then(data => {
                 if (data.Response === 'True') {
                     // Update with movie details
+                    movieContainer.attr('class', 'col-lg-9 pb-3 container mb-4 bg-secondary rounded-3');
                     movieTitleElement.text(data.Title);
                     moviePosterElement.attr('src', data.Poster);
                     movieInfoElement.html(
-                        '<p>Director: ' + data.Director + '</p>' +
-                        '<p>Actors: ' + data.Actors + '</p>' +
-                        '<p>Genre: ' + data.Genre + '</p>' +
-                        '<p>Plot: ' + data.Plot + '</p>' +
-                        '<p>Rated: ' + data.Rated + '</p>' +
-                        '<p>Runtime: ' + data.Runtime + '</p>' +
-                        '<p>Year: ' + data.Year + '</p>' +
-                        '<p>IMDb Rating: ' + data.imdbRating + '</p>' +
-                        '<p id="imdbID" style="display: none;">' + data.imdbID + '</p>'
+                        '<h6>' + data.Plot + '</h6>' +
+                        '<hr>' +
+                        '<p><span class="movieInfo-bold">Director</span>&nbsp;&nbsp;&nbsp;&nbsp;' + data.Director + '</p>' +
+                        '<hr>' +
+                        '<p><span class="movieInfo-bold">Actors</span> &nbsp;&nbsp;&nbsp;&nbsp;' + data.Actors + '</p>' +
+                        '<hr>' +
+                        '<p><span class="movieInfo-bold">Genre</span> &nbsp;&nbsp;&nbsp;&nbsp;' + data.Genre + '</p>' +
+                        '<hr>' +
+                        '<p><span class="movieInfo-bold">Rated</span> &nbsp;&nbsp;&nbsp;&nbsp;' + data.Rated + '</p>' +
+                        '<hr>' +
+                        '<p><span class="movieInfo-bold">Runtime</span>&nbsp;&nbsp;&nbsp;&nbsp;' + data.Runtime + '</p>' +
+                        '<hr>' +
+                        '<p><span class="movieInfo-bold">Year</span> &nbsp;&nbsp;&nbsp;&nbsp;' + data.Year + '</p>' +
+                        '<hr>' +
+                        '<p><span class="movieInfo-bold">IMDb Rating</span> &nbsp;&nbsp;&nbsp;&nbsp;' + data.imdbRating + '/10</p>' +
+                        '<hr>' +
+                        '<p id="imdbID" style="display: none;">' + data.imdbID + '</p>' +
+
+                        '<h6 id="details-header" class="mt-5 h6">Trailer</h6>'
                     );
                     showMovieSections();
-                    // // Fetch movie trailer from KinoCheck using IMDb ID
+                    // Fetch movie trailer from KinoCheck using IMDb ID
                     fetchKinoCheckTrailer(imdbID);
                 }
             })
@@ -195,7 +207,7 @@ $(document).ready(function () {
             //         })
             );
             // Append the watchlist item to the watchlist container
-            watchlistContainer.append(watchlistItem);
+            watchlistContainer.prepend(watchlistItem);
 
             // Save the movie to the watchlist in local storage
             saveToWatchlist({ imdbID: imdbID, title: movieTitle });
@@ -248,7 +260,7 @@ $(document).ready(function () {
         // Loop through each item in the watchlist and create watchlist items
         watchlist.forEach(function (movie) {
             const watchlistItem = $('<button>')
-                .addClass('btn btn-secondary watchlist-item')
+                .addClass('btn btn-secondary watchlist-item mb-3')
                 .text(movie.title)
                 .data('imdbID', movie.imdbID)
                 .on('click', function () {
@@ -283,7 +295,7 @@ $(document).ready(function () {
             })
 
             // Append the watchlist item to the watchlist container
-            watchlistContainer.append(watchlistItem);
+            watchlistContainer.prepend(watchlistItem);
         });
     }
 
