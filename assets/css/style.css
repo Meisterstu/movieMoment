@@ -120,6 +120,6 @@ header {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    color: var(--gold);
+    color: var(--bs-gray-500);
     margin-bottom: 0px;
 }
