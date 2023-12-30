@@ -295,7 +295,7 @@ $(document).ready(function () {
             })
 
             // Append the watchlist item to the watchlist container
-            watchlistContainer.append(watchlistItem);
+            watchlistContainer.prepend(watchlistItem);
         });
     }
 
