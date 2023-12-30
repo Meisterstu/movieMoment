@@ -87,3 +87,39 @@ header {
     --bs-bg-opacity: 0.4 !important;
     background-color: rgba(var(--bs-secondary-rgb),var(--bs-bg-opacity))!important;
 }
+
+.modal-content {
+    color: var(--bs-gray-900) !important;
+    background-color: var(--bs-gray-500) !important;
+}
+
+/* *  ----- FOOTER STYLE ----- */
+.github-link {
+    color: var(--gold);
+    margin: 0 10px;
+    transition: transform 0.3s;
+    text-decoration: none;
+}
+
+.github-link:hover {
+    transform: scale(1.2);
+    text-decoration: none;
+}
+
+.linkDecorNone {
+    text-decoration: none;
+}
+
+.ftr-icons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.ftr-copy {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    color: var(--gold);
+    margin-bottom: 0px;
+}
