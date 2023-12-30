@@ -1,5 +1,5 @@
 /* CAN DELETE THESE - JUST CHECKING BOX POSITION */
-
+/* 
 #aside-watchlist {
     border: 2px solid green;
 }
@@ -18,7 +18,8 @@
 
 #movie-trailer {
     border: 2px solid red;
-}
+} 
+*/
 
 /* CAN DELETE THESE - JUST CHECKING BOX POSITION */
 
@@ -72,6 +73,10 @@ header {
     font-size: 10pt !important;
 }
 
+.watchlist-item {
+    text-align: left;
+}
+
 /*   ----- MAIN CONTAINER STYLE ----- */
 #movie-title {
     font-size: 28pt;
@@ -85,9 +90,10 @@ header {
 
 .bg-secondary {
     --bs-bg-opacity: 0.4 !important;
-    background-color: rgba(var(--bs-secondary-rgb),var(--bs-bg-opacity))!important;
+    background-color: rgba(var(--bs-secondary-rgb), var(--bs-bg-opacity)) !important;
 }
 
+/* MODAL STYLE */
 .modal-content {
     color: var(--bs-gray-900) !important;
     background-color: var(--bs-gray-500) !important;
@@ -123,3 +129,57 @@ header {
     color: var(--bs-gray-500);
     margin-bottom: 0px;
 }
+
+
+/* * -------------------- Break Point -------------------- */
+
+/* * --- Media Query for Tablets --- */
+/* applies to medium devices (tablets, less than 991px) */
+@media only screen and (max-width: 991px) {
+
+    /* * ----- HEADER STYLE ----- */
+    header {
+        text-align: center;
+    }
+
+    /* * ----- MAIN CONTAINER STYLE ----- */
+    /* SIDEBAR */
+    #watchlist-header {
+        text-align: center;
+    }
+
+    .watchlist-item {
+        text-align: center;
+    }
+
+    #div-clear-history-button {
+        display: flex !important;
+        justify-content: center;
+    }
+
+    /* MOVIE CONTAINER */
+    #movie-header {
+        text-align: center;
+    }
+
+    #div-movie-poster {
+        text-align: center;
+    }
+
+    /* * ----- FOOTER STYLE ----- */
+    .ftr-icons {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .ftr-copy {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 2vh !important;
+    }
+
+}
+
+/*  -------------------- END Break Point -------------------- */
