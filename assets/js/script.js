@@ -260,7 +260,7 @@ $(document).ready(function () {
         // Loop through each item in the watchlist and create watchlist items
         watchlist.forEach(function (movie) {
             const watchlistItem = $('<button>')
-                .addClass('btn btn-secondary watchlist-item')
+                .addClass('btn btn-secondary watchlist-item mb-3')
                 .text(movie.title)
                 .data('imdbID', movie.imdbID)
                 .on('click', function () {
