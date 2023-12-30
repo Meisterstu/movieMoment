@@ -50,5 +50,7 @@ header {
 }
 
 /* *  ----- MAIN SECTION STYLE ----- */
-
-
+/*   ----- SIDEBAR STYLE ----- */
+#search-form {
+    padding-right: 0px;
+}
