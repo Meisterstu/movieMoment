@@ -43,8 +43,8 @@ header {
     background: linear-gradient(109.6deg, rgb(36, 45, 57) 11.2%, rgb(16, 37, 60) 51.2%, rgb(0, 18, 34) 98.6%);
 }
 
-header.h1 {
-    color: var(--gold) !important;
+.header-title {
+    color: var(--gold);
     font-family: 'Roboto', sans-serif !important;
     font-weight: 700 !important;
 }
