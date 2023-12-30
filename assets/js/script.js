@@ -119,7 +119,9 @@ $(document).ready(function () {
                         '<hr>' +
                         '<p><span class="movieInfo-bold">IMDb Rating</span> &nbsp;&nbsp;&nbsp;&nbsp;' + data.imdbRating + '/10</p>' +
                         '<hr>' +
-                        '<p id="imdbID" style="display: none;">' + data.imdbID + '</p>'
+                        '<p id="imdbID" style="display: none;">' + data.imdbID + '</p>' +
+
+                        '<h6 id="details-header" class="mt-5 h6">Trailer</h6>'
                     );
                     showMovieSections();
                     // Fetch movie trailer from KinoCheck using IMDb ID
@@ -205,7 +207,7 @@ $(document).ready(function () {
             //         })
             );
             // Append the watchlist item to the watchlist container
-            watchlistContainer.append(watchlistItem);
+            watchlistContainer.prepend(watchlistItem);
 
             // Save the movie to the watchlist in local storage
             saveToWatchlist({ imdbID: imdbID, title: movieTitle });
