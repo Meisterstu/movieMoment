@@ -23,13 +23,18 @@
 /* CAN DELETE THESE - JUST CHECKING BOX POSITION */
 
 
-/* Defined main colours */
+/* Defined main css */
 :root {
     --midnightBlue: #001F3F;
     --silver: #A2A2A2;
     --gold: #FFD700;
     --ghostWhite: #fbfbff;
 }
+
+.mb-0 {
+    margin-bottom: 0;
+}
+
 
 /* * ----- BODY STYLE ----- */
 body {
@@ -50,7 +55,35 @@ header {
 }
 
 /* *  ----- MAIN SECTION STYLE ----- */
+#main-content {
+    margin-top: 2rem;
+}
+
 /*   ----- SIDEBAR STYLE ----- */
 #search-form {
     padding-right: 0px;
+}
+
+.movie-search {
+    font-size: 10pt !important;
+}
+
+.dropdown-item {
+    font-size: 10pt !important;
+}
+
+/*   ----- MAIN CONTAINER STYLE ----- */
+#movie-title {
+    font-size: 28pt;
+    font-weight: 700;
+}
+
+.movieInfo-bold {
+    font-family: 'Roboto', sans-serif !important;
+    font-weight: 700 !important;
+}
+
+.bg-secondary {
+    --bs-bg-opacity: 0.4 !important;
+    background-color: rgba(var(--bs-secondary-rgb),var(--bs-bg-opacity))!important;
 }
