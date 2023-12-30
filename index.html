@@ -28,7 +28,8 @@
     <header class="nav-bar p-3 mb-5 movie-header">
         <div class="container">
             <div class="row">
-                <h1 id="form-heading" class="col-lg-6">MovieMoment</h1>
+                <h1 id="form-heading" class="col-lg-6">
+                    <i class="fa-solid fa-film"></i>&nbsp;MovieMoment</h1>
             </div>
         </div>
     </header>
@@ -58,36 +59,37 @@
                     <button id="clear-history-button" type="button"
                         class="btn btn-outline-danger clear-history-button mt-3">
                         <i class="fa-solid fa-trash" title="Delete watchlist" aria-hidden="true"></i>
-                        &nbsp;&nbsp;
+                        &nbsp;
                         <span>Clear History</span>
                     </button>
                 </div>
             </aside>
 
             <!-- Main Content -->
-            <div class="col-lg-9 pb-3">
+            <div id="movie-container" class="col-lg-9 pb-3">
                 <!-- Movie Header -->
                 <section id="movie-header" class="mt-3" role="region" aria-live="polite">
                     <h2 id="movie-title">Movie Name (Placeholder)</h2>
-                    <button type="button" class="btn btn-success save-to-watchlist" id="save-to-watchlist">
-                        Save to Watchlist
+                    <button type="button" id="save-to-watchlist" class="btn btn-success save-to-watchlist"> 
+                        <i class="fa-regular fa-square-plus"></i> &nbsp; Add to Watchlist
                     </button>
                 </section>
 
                 <!-- Movie Details -->
                 <section id="movie-details" class="row mt-3" role="region" aria-live="polite">
                     <!-- Left Column: Movie Info -->
-                    <div class="col-md-6" id="movie-info">
+                    <h6 id="details-header" class="mb-3 h6">Details</h6>
+                    <div id="movie-info" class="col-md-8">
                     </div>
 
                     <!-- Right Column: Movie Poster -->
-                    <div class="col-md-6 text-center">
+                    <div id="div-movie-poster" class="col-md-4 text-right">
                         <img id="movie-poster" src="" alt="Movie Poster" class="img-fluid">
                     </div>
                 </section>
 
                 <!-- Movie Trailer -->
-                <section id="movie-trailer" class="row mt-3 col-md-12" role="region" aria-live="polite">
+                <section id="movie-trailer" class="row mt-3 mb-3 col-md-12" role="region" aria-live="polite">
                     <!-- Include the movie trailer here - do we need this? -->
                     <!-- <div class="col-md-12">
                     </div> -->
@@ -95,8 +97,8 @@
             </div>
         </div>
 
-        <!-- Modal for duplicate films on wathclist -->
-        <div class="modal" id="duplicateFilmModal" tabindex="-1" role="dialog">
+        <!-- Modal for duplicate films on watchlist -->
+        <div id="duplicateFilmModal" class="modal" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -109,7 +111,7 @@
                         <p>Film is already on the watchlist!</p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Understood</button>
                     </div>
                 </div>
             </div>
