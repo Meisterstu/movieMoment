@@ -17,7 +17,7 @@
         href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900|Open+Sans|Roboto+Slab|Quicksand&display=swap"
         rel="stylesheet">
 
-        <!-- Include FontAwesome stylesheet v6.5.1 -->
+    <!-- Include FontAwesome stylesheet v6.5.1 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <link rel="stylesheet" href="./assets/css/style.css" />
@@ -29,7 +29,8 @@
         <div class="container">
             <div class="row">
                 <h1 id="form-heading" class="col-lg-6">
-                    <i class="fa-solid fa-film"></i>&nbsp;MovieMoment</h1>
+                    <i class="fa-solid fa-film"></i>&nbsp;MovieMoment
+                </h1>
             </div>
         </div>
     </header>
@@ -53,7 +54,9 @@
 
                 <hr />
 
-                <h5 id="watchlist-header" class="mb-3 h5 form-label">Watchlist</h5>
+                <h5 id="watchlist-header" class="mb-3 h5 form-label">
+                    <i class="fa-solid fa-list"></i>&nbsp; Watchlist
+                </h5>
                 <div id="history" class="list-group col-lg-12"></div>
                 <div id="div-clear-history-button">
                     <button id="clear-history-button" type="button"
@@ -70,7 +73,7 @@
                 <!-- Movie Header -->
                 <section id="movie-header" class="mt-3" role="region" aria-live="polite">
                     <h2 id="movie-title">Movie Name (Placeholder)</h2>
-                    <button type="button" id="save-to-watchlist" class="btn btn-success save-to-watchlist"> 
+                    <button type="button" id="save-to-watchlist" class="btn btn-success save-to-watchlist">
                         <i class="fa-regular fa-square-plus"></i> &nbsp; Add to Watchlist
                     </button>
                 </section>
@@ -108,7 +111,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <p>Film is already on the watchlist!</p>
+                        <p><i class="fa-solid fa-circle-info"></i>&nbsp; Film is already on the watchlist!</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Understood</button>
