@@ -20,7 +20,12 @@ Follow the URL link provided: https://Meisterstu.github.io/movieMoment/
 
 The search box is on the left side of the page. When a valid movie is searched for, a list of options is displayed. On selection, movie information is displayed - including the movie trailer. There is an option to add movies to a watchlist. The movies in the watchlist can be clicked t bring up the relevant information.If an invalid movie is searched, a warning message flashes up. The history can be cleared from local storage by pressing the 'Clear History' button.
 
-![screenshot of webpage](assets/Screenshot1.JPG)
+Screenshot of blank form
+<img width="1440" alt="screenshot-of-blank-form" src="./assets/images/ScreenshotLaunch.png">
+
+Screenshot of form in use
+<img width="1440" alt="screenshot-showing-Mulan-Film" src="./assets/images/ScreenshotMulan.png">
+
 
 ## Credits
 
