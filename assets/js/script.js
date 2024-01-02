@@ -9,7 +9,6 @@ fetch(omdbURL)
         console.log(data);
     });
 
-
 omdbApiKey = '17a1e0cd';
 
 const searchInput = $('#search-input');
@@ -92,6 +91,7 @@ $(document).ready(function () {
         dropdownMenu.show();
     }
 
+    // Function to get movie details from omdb API
     function getMovieDetails(imdbID) {
         const omdbDetailURL = 'https://www.omdbapi.com/?apikey=' + omdbApiKey + '&i=' + imdbID
         fetch(omdbDetailURL)
@@ -139,6 +139,19 @@ $(document).ready(function () {
         dropdownMenu.hide();
     }
 
+    // Function to show the duplicate film modal
+    function showDuplicateFilmModal() {
+        $('#duplicateFilmModal').modal('show');
+
+        // Remove existing click event listeners
+        $('#duplicateFilmModal .close, #duplicateFilmModal [data-dismiss="modal"]').off('click');
+
+        // Add new click event listeners
+        $('#duplicateFilmModal .close, #duplicateFilmModal [data-dismiss="modal"]').on('click', function () {
+            $('#duplicateFilmModal').modal('hide');
+        });
+    }
+
     // Function to save a movie to the watchlist in local storage
     function saveToWatchlist(movie) {
         // Retrieve existing watchlist from local storage
@@ -157,83 +170,80 @@ $(document).ready(function () {
         }
     }
 
+    // Function to populate watchlist from local storage
+    function populateWatchlistFromLocalStorage() {
+        // Retrieve existing watchlist from local storage
+        const watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
 
-
-
-    // event listener for save to watchlist button 
-    $('#save-to-watchlist').on('click', function (event) {
-        event.preventDefault();
-        const movieTitle = $('#movie-title').text();
-        const imdbID = $('#imdbID').text();
-        // CHECK THIS WORKS
-        console.log(imdbID);
-
-        // Check if a button with the same imdbID already exists
-        const existingButton = $('.watchlist-item').filter(function () {
-            return $(this).data('imdbID') === imdbID;
-        });
-
-        if (!existingButton.length) { 
+        // Loop through each item in the watchlist and create watchlist items
+        watchlist.forEach(function (movie) {
             const watchlistItem = $('<div>')
-            .addClass('watchlist-item')
-            .append(
-                $('<button>')
-                    .addClass('btn btn-secondary movie-info-button')
-                    .text(movieTitle)
-                    .data('imdbID', imdbID)
-                    .on('click', function () {
-                        getMovieDetails(imdbID);
-                    }),
+                .addClass('watchlist-item')
+                .append(
+                    $('<button>')
+                        .addClass('btn btn-secondary movie-info-button')
+                        .text(movie.title)
+                        .data('imdbID', movie.imdbID)
+                        .on('click', function () {
+                            getMovieDetails(movie.imdbID);
+                        }),
+                    $('<button>')
+                        .addClass('btn btn-danger close-button')
+                        .text('X')
+                        .on('click', function (event) {
+                            // Prevents the click event from triggering on the movie info button
+                            event.stopPropagation();
+                            // Remove the movie from local storage
+                            removeMovieFromLocalStorage(movie.imdbID);
+                            // Remove the movie display from the DOM
+                            $(this).parent('.watchlist-item').remove();
+                        })
+                );
 
-            // THINK WE WOULD NEED TO ADD removeMovieFromLocalStorage function
-            // .append(
-            //     $('<button>')
-            //         .addClass('btn btn-secondary movie-info-button')
-            //         .text(movieTitle)
-            //         .data('imdbID', imdbID)
-            //         .on('click', function () {
-            //             getMovieDetails(imdbID);
-            //         }),
-            //     $('<button>')
-            //         .addClass('btn btn-danger close-button')
-            //         .text('X')
-            //         .on('click', function (event) {
-            //             // Prevents the click event from triggering on the movie info button
-            //             event.stopPropagation(); 
-            //             // Remove the movie from local storage
-            //             removeMovieFromLocalStorage(imdbID);
-            //             // Remove the movie display from the DOM
-            //             $(this).parent('.watchlist-item').remove();
-            //         })
-            );
             // Append the watchlist item to the watchlist container
             watchlistContainer.prepend(watchlistItem);
+        });
+    }
 
-            // Save the movie to the watchlist in local storage
-            saveToWatchlist({ imdbID: imdbID, title: movieTitle });
+    // Function to remove a movie from local storage
+    function removeMovieFromLocalStorage(imdbID) {
+        const watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
+
+        // Find the index of the movie in the watchlist array
+        const index = watchlist.findIndex(movie => movie.imdbID === imdbID);
+
+        // If the movie is found, remove it from the watchlist array
+        if (index !== -1) {
+            watchlist.splice(index, 1);
+            // Update the local storage with the modified watchlist
+            localStorage.setItem('watchlist', JSON.stringify(watchlist));
+            // Update the clear history button visibility
             updateClearHistoryButtonVisibility();
-
-        } else {
-            // Show the modal if the film is already in the watchlist
-            $('#duplicateFilmModal').modal('show');
-
-            // Manually add click event listeners for close button and "×" button
-            $('#duplicateFilmModal .close, #duplicateFilmModal [data-dismiss="modal"]').on('click', function () {
-                $('#duplicateFilmModal').modal('hide');
-            });
         }
+    }
 
+    // Function to remove a movie from the watchlist
+    function removeFromWatchlist(imdbID) {
+        // Remove the movie from local storage
+        removeMovieFromLocalStorage(imdbID);
 
-    });
+        // Remove the movie display from the DOM
+        const watchlistItem = $('.watchlist-item').filter(function () {
+            return $(this).find('.movie-info-button').data('imdbID') === imdbID;
+        });
+        watchlistItem.remove();
 
-    // Add event listener for modal close button click (outside of the above)
-    $('#duplicateFilmModal').on('hidden.bs.modal', function () {
-    });
+        // Update the clear history button visibility
+        updateClearHistoryButtonVisibility();
+    }
 
     // Function to update the visibility of the clear history button based on local storage
     function updateClearHistoryButtonVisibility() {
-        // Check if there are items in local storage
-        if (localStorage.length > 0) {
+        // Retrieve existing watchlist from local storage
+        const watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
+
+        // Check if there are items in the watchlist
+        if (watchlist.length > 0) {
             // If there are items, display the button
             $('#clear-history-button').css('display', 'block');
         } else {
@@ -242,69 +252,7 @@ $(document).ready(function () {
         }
     }
 
-    // Event listener for the clear history button
-    $('#clear-history-button').on('click', function () {
-        // Clear local storage
-        localStorage.clear();
-
-        // Clear the watchlist container
-        watchlistContainer.empty();
-        updateClearHistoryButtonVisibility();
-    });
-
-    // Function to populate watchlist from local storage
-    function populateWatchlistFromLocalStorage() {
-        // Retrieve existing watchlist from local storage
-        const watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
-
-        // Loop through each item in the watchlist and create watchlist items
-        watchlist.forEach(function (movie) {
-            const watchlistItem = $('<button>')
-                .addClass('btn btn-secondary watchlist-item mb-3')
-                .text(movie.title)
-                .data('imdbID', movie.imdbID)
-                .on('click', function () {
-                    // When a watchlist item is clicked, get and display movie details
-                    getMovieDetails(movie.imdbID);
-                    // For error checking
-                    console.log(movie.imdbID)
-                    showMovieSections();
-            
-            // THINK WE WOULD NEED TO ADD removeMovieFromLocalStorage function
-            // const watchlistItem = $('<div>')
-            // .addClass('watchlist-item')
-            // .append(
-            //     $('<button>')
-            //         .addClass('btn btn-secondary movie-info-button')
-            //         .text(movieTitle)
-            //         .data('imdbID', imdbID)
-            //         .on('click', function () {
-            //             getMovieDetails(imdbID);
-            //         }),
-            //     $('<button>')
-            //         .addClass('btn btn-danger close-button')
-            //         .text('X')
-            //         .on('click', function (event) {
-            //             // Prevents the click event from triggering on the movie info button
-            //             event.stopPropagation(); 
-            //             // Remove the movie from local storage
-            //             removeMovieFromLocalStorage(imdbID);
-            //             // Remove the movie display from the DOM
-            //             $(this).parent('.watchlist-item').remove();
-            //         })
-            })
-
-            // Append the watchlist item to the watchlist container
-            watchlistContainer.prepend(watchlistItem);
-        });
-    }
-
-    // Populate watchlist from local storage on page load
-    populateWatchlistFromLocalStorage();
-
-    // Initial check on page load
-    updateClearHistoryButtonVisibility();
-
+    // Function to get trailer from kinocheck API
     function fetchKinoCheckTrailer(imdbID) {
         const kinoCheckURL = 'https://api.kinocheck.de/movies?imdb_id=' + imdbID + '&language=en';
         console.log(kinoCheckURL);
@@ -346,6 +294,81 @@ $(document).ready(function () {
             });
     }
 
+    // Populate watchlist from local storage on page load
+    populateWatchlistFromLocalStorage();
+
+    // Initial check on page load
+    updateClearHistoryButtonVisibility();
 
 
+    // Event listener for save to watchlist button 
+    $('#save-to-watchlist').on('click', function (event) {
+        event.preventDefault();
+        const movieTitle = $('#movie-title').text();
+        const imdbID = $('#imdbID').text();
+
+        // Check if a button with the same imdbID already exists
+        const existingButton = $('.watchlist-item').filter(function () {
+            return $(this).find('.movie-info-button').data('imdbID') === imdbID;
+        });
+
+        if (!existingButton.length) {
+            const watchlistItem = $('<div>')
+                .addClass('watchlist-item')
+                .append(
+                    $('<button>')
+                        .addClass('btn btn-secondary movie-info-button')
+                        .text(movieTitle)
+                        .data('imdbID', imdbID)
+                        .on('click', function () {
+                            getMovieDetails(imdbID);
+                        }),
+                    $('<button>')
+                        .addClass('btn btn-danger close-button')
+                        .text('X')
+                        .on('click', function (event) {
+                            // Prevents the click event from triggering on the movie info button
+                            event.stopPropagation();
+                            // Remove the movie from local storage
+                            removeMovieFromLocalStorage(imdbID);
+                            // Remove the movie display from the DOM
+                            $(this).parent('.watchlist-item').remove();
+                        })
+                );
+
+            // Append the watchlist item to the watchlist container
+            watchlistContainer.prepend(watchlistItem);
+
+            // Save the movie to the watchlist in local storage
+            saveToWatchlist({ imdbID: imdbID, title: movieTitle });
+            updateClearHistoryButtonVisibility();
+        } else {
+            // Show the modal if the film is already in the watchlist
+            showDuplicateFilmModal();
+        }
     });
+
+    // Event listener for close button on watchlist item
+    watchlistContainer.on('click', '.close-button', function (event) {
+        event.stopPropagation(); // Prevents the click event from triggering on the movie info button
+        const imdbID = $(this).siblings('.movie-info-button').data('imdbID');
+        // Remove the movie from the watchlist
+        removeFromWatchlist(imdbID);
+
+        // Update the clear history button visibility
+        updateClearHistoryButtonVisibility();
+    });
+
+    // Event listener for clear history button
+    $('#clear-history-button').on('click', function () {
+        // Clear local storage
+        localStorage.clear();
+
+        // Clear the watchlist container
+        watchlistContainer.empty();
+
+        // Update the clear history button visibility
+        updateClearHistoryButtonVisibility();
+    });
+
+});
