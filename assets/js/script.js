@@ -119,13 +119,13 @@ $(document).ready(function () {
                         '<hr>' +
                         '<p><span class="movieInfo-bold">IMDb Rating</span> &nbsp;&nbsp;&nbsp;&nbsp;' + data.imdbRating + '/10</p>' +
                         '<hr>' +
-                        '<p id="imdbID" style="display: none;">' + data.imdbID + '</p>' +
+                        '<p id="imdbID" style="display: none;">' + data.imdbID + '</p>'
 
-                        '<h6 id="details-header" class="mt-5 h6">Trailer</h6>'
+                        // '<h6 id="details-header" class="mt-5 h6">Trailer</h6>'
                     );
                     showMovieSections();
                     // Fetch movie trailer from KinoCheck using IMDb ID
-                    fetchKinoCheckTrailer(imdbID,data.Title);
+                    fetchKinoCheckTrailer(imdbID, data.Title);
                 }
             })
             .catch(error => {
@@ -253,7 +253,7 @@ $(document).ready(function () {
     }
 
     // Function to get trailer from kinocheck API
-    function fetchKinoCheckTrailer(imdbID,title) {
+    function fetchKinoCheckTrailer(imdbID, title) {
         const kinoCheckURL = 'https://api.kinocheck.de/movies?imdb_id=' + imdbID + '&language=en';
         console.log(kinoCheckURL);
 
@@ -261,6 +261,11 @@ $(document).ready(function () {
 
         // Clear previous trailer content
         trailerSection.html('');
+        // Store the trailer header content
+        const trailerHeader = $('<h6 id="details-header" class="mt-5 h6">Trailer</h6>');
+
+        // Append the trailer header
+        trailerSection.append(trailerHeader);
 
         // Fetch movie details from KinoCheck
         fetch(kinoCheckURL)
@@ -283,13 +288,13 @@ $(document).ready(function () {
                     const youtubeVideoId = data.trailer.youtube_video_id;
                     // Embed the YouTube video
                     const embedCode = '<iframe width="560" height="315" src="https://www.youtube.com/embed/' + youtubeVideoId + '" frameborder="0" allowfullscreen></iframe>';
-                    trailerSection.html(embedCode);
+                    trailerSection.append(embedCode);
                 }
             })
             // If no trailer can be found, display message
             .catch(function (error) {
                 console.log('Fetch error:', error);
-                trailerSection.html('<p>Sorry no trailer is available for this film through the Kinocheck API - please try elsewhere! <br>For example: <a href="https://www.youtube.com/results?search_query=' + encodeURIComponent(title) + '" target="_blank">www.youtube.com</a></p>');
+                trailerSection.append('<p>Sorry no trailer is available for this film through the Kinocheck API - please try elsewhere! <br>For example: <a href="https://www.youtube.com/results?search_query=' + encodeURIComponent(title) + '" target="_blank">www.youtube.com</a></p>');
             });
     }
 
