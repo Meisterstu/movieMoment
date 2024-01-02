@@ -74,6 +74,10 @@ header {
 }
 
 /* *  ----- FOOTER STYLE ----- */
+footer {
+    background-color: var(--midnightBlue);
+}
+
 .github-link {
     color: var(--gold);
     margin: 0 10px;
