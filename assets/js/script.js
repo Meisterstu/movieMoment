@@ -314,7 +314,7 @@ $(document).ready(function () {
 
         if (!existingButton.length) {
             const watchlistItem = $('<div>')
-                .addClass('watchlist-item')
+                .addClass('watchlist-item mb-3 d-flex justify-content-between align-items-center')
                 .append(
                     $('<button>')
                         .addClass('btn btn-secondary movie-info-button')
@@ -325,7 +325,7 @@ $(document).ready(function () {
                         }),
                     $('<button>')
                         .addClass('btn btn-danger close-button')
-                        .text('X')
+                        .html('<i class="fa-solid fa-xmark"></i>')
                         .on('click', function (event) {
                             // Prevents the click event from triggering on the movie info button
                             event.stopPropagation();
