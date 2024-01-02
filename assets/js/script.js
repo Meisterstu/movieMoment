@@ -125,7 +125,7 @@ $(document).ready(function () {
                     );
                     showMovieSections();
                     // Fetch movie trailer from KinoCheck using IMDb ID
-                    fetchKinoCheckTrailer(imdbID);
+                    fetchKinoCheckTrailer(imdbID,data.Title);
                 }
             })
             .catch(error => {
@@ -253,7 +253,7 @@ $(document).ready(function () {
     }
 
     // Function to get trailer from kinocheck API
-    function fetchKinoCheckTrailer(imdbID) {
+    function fetchKinoCheckTrailer(imdbID,title) {
         const kinoCheckURL = 'https://api.kinocheck.de/movies?imdb_id=' + imdbID + '&language=en';
         console.log(kinoCheckURL);
 
@@ -268,14 +268,14 @@ $(document).ready(function () {
             .then(function (response) {
                 // Check if the response is successful
                 if (!response.ok) {
-                    throw new Error('Network response was not ok');
+                    console.log('Network response was not ok');
                 }
                 return response.json();
             })
             .then(function (data) {
                 // Check if data.trailer is null
                 if (data.trailer === null) {
-                    throw new Error('No trailer available from kinocheck');
+                    console.log('No trailer available from kinocheck');
                 }
 
                 // Check if the data contains a trailer object with youtube_video_id
@@ -290,7 +290,7 @@ $(document).ready(function () {
             // If no trailer can be found, display message
             .catch(function (error) {
                 console.log('Fetch error:', error);
-                trailerSection.html('<p>Sorry no trailer is available for this film through the Kinocheck API - please try elsewhere!</p>');
+                trailerSection.html('<p>Sorry no trailer is available for this film through the Kinocheck API - please try elsewhere! <br>For example: <a href="https://www.youtube.com/results?search_query=' + encodeURIComponent(title) + '" target="_blank">www.youtube.com</a></p>');
             });
     }
 
