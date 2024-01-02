@@ -289,7 +289,7 @@ $(document).ready(function () {
             })
             // If no trailer can be found, display message
             .catch(function (error) {
-                console.error('Fetch error:', error);
+                console.log('Fetch error:', error);
                 trailerSection.html('<p>Sorry no trailer is available for this film through the Kinocheck API - please try elsewhere!</p>');
             });
     }
