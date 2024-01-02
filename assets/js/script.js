@@ -178,7 +178,7 @@ $(document).ready(function () {
         // Loop through each item in the watchlist and create watchlist items
         watchlist.forEach(function (movie) {
             const watchlistItem = $('<div>')
-                .addClass('watchlist-item')
+                .addClass('watchlist-item mb-3')
                 .append(
                     $('<button>')
                         .addClass('btn btn-secondary movie-info-button')
