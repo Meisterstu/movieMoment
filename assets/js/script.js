@@ -189,7 +189,7 @@ $(document).ready(function () {
                         }),
                     $('<button>')
                         .addClass('btn btn-danger close-button')
-                        .text('X')
+                        .html('<i class="fa-solid fa-xmark"></i>')
                         .on('click', function (event) {
                             // Prevents the click event from triggering on the movie info button
                             event.stopPropagation();
