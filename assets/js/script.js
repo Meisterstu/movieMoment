@@ -281,7 +281,6 @@ $(document).ready(function () {
                 // Check if the data contains a trailer object with youtube_video_id
                 if (data.trailer && data.trailer.youtube_video_id) {
                     const youtubeVideoId = data.trailer.youtube_video_id;
-
                     // Embed the YouTube video
                     const embedCode = '<iframe width="560" height="315" src="https://www.youtube.com/embed/' + youtubeVideoId + '" frameborder="0" allowfullscreen></iframe>';
                     trailerSection.html(embedCode);

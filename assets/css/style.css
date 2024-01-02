@@ -73,6 +73,10 @@ header {
     background-color: var(--bs-gray-500) !important;
 }
 
+.container-bottom {
+    margin-bottom: 110px;
+}
+
 /* *  ----- FOOTER STYLE ----- */
 footer {
     background-color: var(--midnightBlue);
