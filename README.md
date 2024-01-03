@@ -25,7 +25,7 @@ Screenshot of the blank form
 <img width="1440" alt="screenshot-of-blank-form" src="./assets/images/ScreenshotLaunch.png">
 
 Screenshot of the form in use
-<img width="1440" alt="screenshot-showing-Mulan-Film" src="./assets/images/ScreenshotMulan.png">
+<img width="1440" alt="screenshot-showing-Mulan-Film" src="./assets/images/ScreenshotList.png">
 
 
 ## Credits
