@@ -22,7 +22,7 @@ This project aims to create a movie dashboard with form inputs. When a user sear
 The search box is on the left side of the page. When a valid movie is searched for, a list of options is displayed. On selection, movie information is displayed - including the poster and movie trailer. There is an option to add movies to a watchlist. The movies in the watchlist can be clicked to bring up the relevant information. If an invalid movie is searched, a warning message flashes up. The watchlist can be cleared from local storage by pressing the 'Clear History' button.
 
 Screenshot of the blank form
-<img width="1440" alt="screenshot-of-blank-form" src="./assets/images/ScreenshotLaunch.png">
+<img width="1440" alt="screenshot-of-blank-form" src="./assets/images/ScreenshoLaunch.png">
 
 Screenshot of the form in use
 <img width="1440" alt="screenshot-showing-Mulan-Film" src="./assets/images/ScreenshotList.png">
