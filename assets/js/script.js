@@ -84,6 +84,7 @@ $(document).ready(function () {
                     console.log('Selected movie: ' + movie.Title
                     );
                     getMovieDetails(movie.imdbID);
+                            // if no imdbID entry in KinoCheck for selected movie it returns a CORS error
                     resetSuggestions();
                 });
             dropdownMenu.append(suggestionItem);
@@ -96,6 +97,7 @@ $(document).ready(function () {
         const omdbDetailURL = 'https://www.omdbapi.com/?apikey=' + omdbApiKey + '&i=' + imdbID
         fetch(omdbDetailURL)
             .then(response => response.json())
+                    // if no imdbID entry in KinoCheck for selected movie it returns a CORS error
             .then(data => {
                 if (data.Response === 'True') {
                     // Update with movie details
@@ -126,6 +128,7 @@ $(document).ready(function () {
                     showMovieSections();
                     // Fetch movie trailer from KinoCheck using IMDb ID
                     fetchKinoCheckTrailer(imdbID, data.Title);
+                            // if no imdbID entry in KinoCheck for selected movie it returns a CORS error
                 }
             })
             .catch(error => {
@@ -269,6 +272,7 @@ $(document).ready(function () {
 
         // Fetch movie details from KinoCheck
         fetch(kinoCheckURL)
+        // if no imdbID entry in KinoCheck for selected movie it returns a CORS error
 
             .then(function (response) {
                 // Check if the response is successful
