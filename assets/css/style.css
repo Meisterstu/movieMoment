@@ -34,6 +34,10 @@ header {
     margin-top: 2rem;
 }
 
+.container-bottom {
+    margin-bottom: 110px;
+}
+
 /*   ----- SIDEBAR STYLE ----- */
 #search-form {
     padding-right: 0px;
@@ -51,7 +55,7 @@ header {
     text-align: left;
 }
 
-/*   ----- MAIN CONTAINER STYLE ----- */
+/*   ----- MOVIE INFO STYLE ----- */
 #movie-title {
     font-size: 28pt;
     font-weight: 700;
@@ -67,14 +71,21 @@ header {
     background-color: rgba(var(--bs-secondary-rgb), var(--bs-bg-opacity)) !important;
 }
 
+.no-trailer-link {
+    text-decoration: none;
+    color: var(--gold);
+}
+
+.no-trailer-link:hover {
+    transform: scale(1.2);
+    color: var(--bs-warning);
+    text-decoration: underline;
+}
+
 /* MODAL STYLE */
 .modal-content {
     color: var(--bs-gray-900) !important;
     background-color: var(--bs-gray-500) !important;
-}
-
-.container-bottom {
-    margin-bottom: 110px;
 }
 
 /* *  ----- FOOTER STYLE ----- */

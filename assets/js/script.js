@@ -281,7 +281,7 @@ $(document).ready(function () {
                 // Check if data.trailer is null
                 if (data.trailer === null) {
                     console.log('No trailer available from kinocheck');
-                    trailerSection.append('<p>Sorry no trailer is available for this film through the Kinocheck API - please try elsewhere! <br>For example: <a href="https://www.youtube.com/results?search_query=' + encodeURIComponent(title) + '" target="_blank">www.youtube.com</a></p>');
+                    trailerSection.append('<p class="no-trailer"><i class="fa-solid fa-circle-info"></i>&nbsp;&nbsp;Sorry, no trailer is available for this film through the Kinocheck - please watch it <a href="https://www.youtube.com/results?search_query=' + encodeURIComponent(title) + '" target="_blank" class="no-trailer-link">here</a>.</p>');
                 }
 
                 // Check if the data contains a trailer object with youtube_video_id
@@ -295,7 +295,7 @@ $(document).ready(function () {
             // If no trailer can be found, display message
             .catch(function (error) {
                 console.log('Fetch error:', error);
-                trailerSection.append('<p>Sorry no trailer is available for this film through the Kinocheck API - please try elsewhere! <br>For example: <a href="https://www.youtube.com/results?search_query=' + encodeURIComponent(title) + '" target="_blank">www.youtube.com</a></p>');
+                trailerSection.append('<p class="no-trailer"><i class="fa-solid fa-circle-info"></i>&nbsp;&nbsp;Sorry, no trailer is available for this film through the Kinocheck - please watch it <a href="https://www.youtube.com/results?search_query=' + encodeURIComponent(title) + '" target="_blank" class="no-trailer-link">here</a>.</p>');
             });
     }
 
