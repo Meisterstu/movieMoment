@@ -1,10 +1,10 @@
-# MovieMoment - yourFAVOURITEwatchlist
-Explore and discover your favorite movies or those you're eager to watch. Dive into movie details, poster, and trailer, and effortlessly curate your personal watchlist. Enjoy the ultimate MovieMoment with a seamless and user-friendly watchlist experience.
+# MovieMoment - Your Favourite Watchlist
+Explore and discover your favourite movies or those you're eager to watch. Dive into movie details, poster, and trailer, and effortlessly curate your personal watchlist. Enjoy the ultimate MovieMoment with a seamless and user-friendly watchlist experience.
 
 
 ## Description
 
-This project aims create a movie dashboard with form inputs. When a user searches for a movie they are presented with a list of options. On selection, information about the movie is displayed along with the trailer.
+This project aims to create a movie dashboard with form inputs. When a user searches for a movie they are presented with a list of options. On selection, information about the movie is displayed along with the trailer.
 
 
 ## Table of Contents
@@ -21,10 +21,10 @@ This project aims create a movie dashboard with form inputs. When a user searche
 
 The search box is on the left side of the page. When a valid movie is searched for, a list of options is displayed. On selection, movie information is displayed - including the poster and movie trailer. There is an option to add movies to a watchlist. The movies in the watchlist can be clicked to bring up the relevant information. If an invalid movie is searched, a warning message flashes up. The watchlist can be cleared from local storage by pressing the 'Clear History' button.
 
-Screenshot of blank form
+Screenshot of the blank form
 <img width="1440" alt="screenshot-of-blank-form" src="./assets/images/ScreenshotLaunch.png">
 
-Screenshot of form in use
+Screenshot of the form in use
 <img width="1440" alt="screenshot-showing-Mulan-Film" src="./assets/images/ScreenshotMulan.png">
 
 
@@ -42,7 +42,7 @@ This project is deployed and accessible at the following URLs:
 - [Demo](https://meisterstu.github.io/movieMoment/)
 - [GitHub Repository](https://github.com/Meisterstu/movieMoment)
 
-> Save your favourite movies into our watchlist at MovieMoment.
+> Save your favourite movies to our watchlist at MovieMoment.
 
 
 ## License
