@@ -34,7 +34,7 @@ Screenshot of the form in use showing trailer available
 <img width="1440" alt="screenshot-showing-trailer" src="./assets/images/movieMoment_Trailer.png">
 
 Screenshot of the form in use showing trailer not available
-<img width="1440" alt="screenshot-no-trailer" src="./assets/images/movieMoment_No-Trailer.png">
+<img width="1440" alt="screenshot-no-trailer" src="./assets/images/movieMoment_No-trailer.png">
 
 
 ## Credits
