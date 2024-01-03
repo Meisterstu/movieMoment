@@ -66,6 +66,12 @@ header {
     font-weight: 700 !important;
 }
 
+#details-header {
+    border-left-color: var(--bs-warning);
+    border-left-style: solid;
+    margin-left: 10px;
+}
+
 .bg-secondary {
     --bs-bg-opacity: 0.4 !important;
     background-color: rgba(var(--bs-secondary-rgb), var(--bs-bg-opacity)) !important;
