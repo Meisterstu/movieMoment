@@ -15,6 +15,7 @@ const searchInput = $('#search-input');
 const dropdownMenu = $('#search-form .dropdown-menu');
 const movieContainer = $('#movie-container');
 const movieTitleElement = $('#movie-title');
+const movieRating = $('#value-rating');
 const moviePosterElement = $('#movie-poster');
 const movieInfoElement = $('#movie-info');
 const watchlistContainer = $('#history');
@@ -103,6 +104,7 @@ $(document).ready(function () {
                     // Update with movie details
                     movieContainer.attr('class', 'col-lg-9 pb-3 container mb-4 bg-secondary rounded-3');
                     movieTitleElement.text(data.Title);
+                    movieRating.html('&nbsp;').text(data.imdbRating);
                     moviePosterElement.attr('src', data.Poster);
                     movieInfoElement.html(
                         '<h6>' + data.Plot + '</h6>' +
