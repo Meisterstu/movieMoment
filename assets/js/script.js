@@ -121,8 +121,6 @@ $(document).ready(function () {
                         '<hr>' +
                         '<p><span class="movieInfo-bold">Year</span> &nbsp;&nbsp;&nbsp;&nbsp;' + data.Year + '</p>' +
                         '<hr>' +
-                        '<p><span class="movieInfo-bold">IMDb Rating</span> &nbsp;&nbsp;&nbsp;&nbsp;' + data.imdbRating + '/10</p>' +
-                        '<hr>' +
                         '<p id="imdbID" style="display: none;">' + data.imdbID + '</p>'
 
                         // '<h6 id="details-header" class="mt-5 h6">Trailer</h6>'

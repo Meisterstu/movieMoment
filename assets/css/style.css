@@ -65,6 +65,14 @@ header {
     margin-bottom: 0;
 }
 
+.gold {
+    color:var(--gold);
+}
+
+.gray-500 {
+    color:var(--bs-gray-500);
+}
+
 .movieInfo-bold {
     font-family: 'Roboto', sans-serif !important;
     font-weight: 700 !important;
